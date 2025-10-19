@@ -1,23 +1,24 @@
 package calculator.presentation;
 
 import calculator.application.CalculatorService;
-import calculator.view.Input;
-import calculator.view.Output;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 
-public class CalculatorController{
+public class CalculatorController {
 
     private final CalculatorService calculatorService;
-    private final Input input;
-    private final Output output;
+    private final InputView inputView;
+    private final OutputView outputView;
 
-    public CalculatorController(CalculatorService calculatorService, Input input, Output output){
+    public CalculatorController(CalculatorService calculatorService, InputView inputView, OutputView outputView) {
         this.calculatorService = calculatorService;
-        this.input = input;
-        this.output = output;
+        this.inputView = inputView;
+        this.outputView = outputView;
     }
 
-    public void run () {
-        String userInput = input.readLine();
-        output.print(calculatorService.run(userInput).result().toString());
+    public void start(){
+        String input = inputView.readline();
+        Number number = calculatorService.calculate(input);
+        outputView.print(number);
     }
 }
