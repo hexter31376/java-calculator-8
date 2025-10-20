@@ -1,31 +1,37 @@
 package calculator.application;
 
-import calculator.application.dto.CalculatorRequest;
-import calculator.application.dto.CalculatorResponse;
-import calculator.application.service.CalculatorTokenizer;
-import calculator.application.service.OperationalCollectionCalculator;
-import calculator.domain.token.MeanToken;
-
-import java.util.List;
+import calculator.domain.delimiter.Delimiters;
+import calculator.domain.number.Numbers;
+import calculator.domain.parsor.StringParser;
+import calculator.domain.parsor.dto.DelimiterFilteredResult;
 
 public class CalculatorService {
 
-        private final CalculatorTokenizer calculatortokenizer;
-        private final OperationalCollectionCalculator operationalCollectionCalculator;
+    private final StringParser stringParser;
 
-        public CalculatorService (CalculatorTokenizer calculatorTokenizer, OperationalCollectionCalculator operationalCollectionCalculator) {
-            this.calculatortokenizer = calculatorTokenizer;
-            this.operationalCollectionCalculator = operationalCollectionCalculator;
+    public CalculatorService(StringParser stringParser) {
+        this.stringParser = stringParser;
+    }
+
+    public Double calculate(String input) {
+
+        if (input == null) {
+            throw new IllegalArgumentException("입력값이 null 입니다.");
+        }
+        if (input.isEmpty()) {
+            return 0.0;
         }
 
-        public CalculatorResponse run (String userInput) {
-            CalculatorRequest calculatorRequest = new CalculatorRequest(userInput);
+        // 1. 파싱
+        DelimiterFilteredResult delimiterFilteredResult = stringParser.parse(input);
+        // 2. 정규식 추출
+        String regex = delimiterFilteredResult.regex();
+        // 3. 숫자 추출
+        String[] numberTokens = delimiterFilteredResult.delimiterNumberText().split(regex);
+        // 4. 숫자 도메인 생성
+        Numbers numbers = Numbers.from(numberTokens);
 
-            List<MeanToken> meanTokens = calculatortokenizer.doTokenize(calculatorRequest); // 유효하지 않은 조건 필터링, 커스텀 구분자 사전 필터링 및 등록, 커스텀 구분자 필터링이 완료된 '순수한' 구문을 토크나이징 해서 의미를 가진 구문으로 래핑한 리스트 반환
-            CalculatorResponse calculatorResponse = operationalCollectionCalculator.doOperate(meanTokens); // 의미 단위 토큰리스트를 받아들여 실제 연산 진행
-
-            return calculatorResponse;
-        }
-
-
+        // 5. 연산 후 리턴
+        return numbers.sum();
+    }
 }
