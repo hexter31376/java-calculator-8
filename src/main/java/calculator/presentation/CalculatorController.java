@@ -21,7 +21,8 @@ public class CalculatorController {
         double number = calculatorService.calculate(input);
         if (number % 1 == 0) {
             outputView.print((int)number);
+        } else  {
+            outputView.print(number);
         }
-        outputView.print(number);
     }
 }
