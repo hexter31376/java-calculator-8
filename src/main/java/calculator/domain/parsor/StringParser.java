@@ -1,0 +1,31 @@
+package calculator.domain.parsor;
+
+import calculator.domain.delimiter.Delimiters;
+import calculator.domain.parsor.dto.DelimiterFilteredResult;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class StringParser {
+
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)" + Pattern.quote("\\n" ) + (".*"));
+
+    public DelimiterFilteredResult parse(String rawText) {
+        if (rawText.startsWith("//")) {
+            String customDelimiter = getCustomDelimiter(rawText);
+            String regex = Delimiters.of(customDelimiter).buildRegex();
+            return new DelimiterFilteredResult(regex, rawText);
+        } else {
+            String defalutRegex = Delimiters.setDefault().buildRegex();
+            return new DelimiterFilteredResult(defalutRegex, rawText);
+        }
+    }
+
+    private String getCustomDelimiter (String rawText) {
+        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(rawText);
+        if (!matcher.find()) {
+            throw new IllegalArgumentException("구분자 형식이 잘못되었습니다.");
+        }
+        return matcher.group(1);
+    }
+}
