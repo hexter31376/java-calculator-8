@@ -13,11 +13,17 @@ CalculatorController : CalculatorService를 호출하여 메인 로직을 수행
 CalculatorService : ParsorService를 호출하여 파싱을 진행하고 파싱한 데이터로 연산을 수행하는 서비스, 숫자를 리턴한다.
 
 #### parsor
-ParsorService : 실제 데이터의 파싱을 진행하고 연산 가능한 컬렉션을 돌려준다.
+StringParsor : 실제 데이터의 파싱을 진행하고 파싱이 완료되면 완성된 DelimiterFilteredResult를 반환
+##### dto
+DelimiterFilteredResult : 사용자의 입력값을 커스텀 구분자를 포함하거나 포함하지 않거나 하여 정규식 자체와 실제 숫자, 구분자가 포함된 문자열을 감싼 dto
 
 #### delimiter
 Delimiter : 구분자 자체를 저장하고 내보내며 저장하기 전 유효성 검사를 실시한다
 Delimiters : 구분자 자체를 리스트로 저장하며 리스트 항목들이 전부 포함된 정규식 포맷을 만들어낸다.
+
+#### number
+Numbers : dto의 값을 토크나이징하고 number 배열 요소 생성 및 해당 요소들의 합산을 담당
+
 
 ##### 제약 조건
 1. 숫자
