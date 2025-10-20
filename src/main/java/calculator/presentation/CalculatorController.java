@@ -18,7 +18,10 @@ public class CalculatorController {
 
     public void start(){
         String input = inputView.readline();
-        Number number = calculatorService.calculate(input);
+        double number = calculatorService.calculate(input);
+        if (number % 1 == 0) {
+            outputView.print((int)number);
+        }
         outputView.print(number);
     }
 }
