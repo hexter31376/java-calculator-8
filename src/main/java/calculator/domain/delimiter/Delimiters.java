@@ -1,5 +1,6 @@
 package calculator.domain.delimiter;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -24,7 +25,12 @@ public class Delimiters {
         return new Delimiters(delimiterList);
     }
 
-    public String regixBuild() {
+    public static Delimiters setDefault() {
+        List<Delimiter> delimiterList = new ArrayList<>(DEFAULT_DELIMITERS);
+        return new Delimiters(delimiterList);
+    }
+
+    public String buildRegex() {
         String delimiterRegix = delimiterValues.stream()
                 .map(Delimiter::getValue)
                 .map(Pattern::quote)
