@@ -1,7 +1,7 @@
 package calculator.config;
 
 import calculator.application.CalculatorService;
-import calculator.domain.parsor.StringParser;
+import calculator.domain.parser.StringParser;
 import calculator.presentation.CalculatorController;
 import calculator.view.InputView;
 import calculator.view.OutputView;

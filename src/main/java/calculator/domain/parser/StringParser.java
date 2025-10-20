@@ -1,7 +1,7 @@
-package calculator.domain.parsor;
+package calculator.domain.parser;
 
 import calculator.domain.delimiter.Delimiters;
-import calculator.domain.parsor.dto.DelimiterFilteredResult;
+import calculator.domain.parser.dto.DelimiterFilteredResult;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,9 +1,8 @@
 package calculator.application;
 
-import calculator.domain.delimiter.Delimiters;
 import calculator.domain.number.Numbers;
-import calculator.domain.parsor.StringParser;
-import calculator.domain.parsor.dto.DelimiterFilteredResult;
+import calculator.domain.parser.StringParser;
+import calculator.domain.parser.dto.DelimiterFilteredResult;
 
 public class CalculatorService {
 

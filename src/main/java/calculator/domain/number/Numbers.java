@@ -1,6 +1,5 @@
 package calculator.domain.number;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
