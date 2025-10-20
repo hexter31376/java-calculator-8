@@ -20,8 +20,8 @@ public class StringParser {
 
             return new DelimiterFilteredResult(regex, delimiterNumberText);
         } else {
-            String defalutRegex = Delimiters.setDefault().buildRegex();
-            return new DelimiterFilteredResult(defalutRegex, rawText);
+            String defaultRegex = Delimiters.setDefault().buildRegex();
+            return new DelimiterFilteredResult(defaultRegex, rawText);
         }
     }
 
